@@ -62,6 +62,8 @@ const upload = multer({storage});
 // routes with files
 app.post("/auth/register",upload.single("picture"),register);
 app.post("/posts", verify, upload.single("picture"), createPost);
+
+
 // baki sab bina file ke routes wale folder m 
 app.use("/auth", authRouter);
 // user routes 
