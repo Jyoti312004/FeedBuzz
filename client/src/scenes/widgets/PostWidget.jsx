@@ -28,6 +28,7 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+  const user = useSelector((state) => state.user);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
@@ -55,7 +56,7 @@ const PostWidget = ({
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId: loggedInUserId, comment: commentText }), // Sending comment text
+      body: JSON.stringify({ userId: loggedInUserId, comment:` ${user.firstName}:  ${commentText} `}), // Sending comment text
     });
     const updatedPost = await response.json();
     dispatch(setPost({ post: updatedPost }));
@@ -114,6 +115,7 @@ const PostWidget = ({
           <Input
             placeholder="Add a comment..."
             value={commentText}
+
             onChange={(e) => setCommentText(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
