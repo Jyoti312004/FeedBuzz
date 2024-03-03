@@ -13,7 +13,7 @@ export const verify = async(req,res,next) =>{
         // after that we will verify the token 
         const verified = jwt.verify(token,process.env.JWT_SECRET);
         req.user = verified;
-        console.log(req);
+        //console.log(req);
         next();
 
     }catch(error){

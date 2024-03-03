@@ -71,3 +71,27 @@ export const likePost = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+/* UPDATE */
+export const addComment = async (req, res) => {
+  try {
+    const { id } = req.params; // Assuming id is the post ID
+    const { userId, comment } = req.body; // Assuming userId and comment are sent in the request body
+
+    // Find the post by ID
+    const post = await Post.findById(id);
+
+    // Add the comment to the post's comments array
+    post.comments.push(
+      comment
+     // You can also include a timestamp for when the comment was created
+    );
+
+    // Save the updated post
+    const updatedPost = await post.save();
+
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
