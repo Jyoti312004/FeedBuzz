@@ -25,12 +25,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
+
 // we have to know the use of helmet
-app.use(
-  helmet.contentSecurityPolicy({
-    policy: "cross-origin",
-  })
-);
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(
   bodyParser.json({
@@ -44,7 +41,9 @@ app.use(bodyParser.urlencoded({
     extended:true
 }));
 app.use(cors());
+let paths = path.join(__dirname, 'public/assets');
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
+console.log(paths)
 
 
 // file storage 
