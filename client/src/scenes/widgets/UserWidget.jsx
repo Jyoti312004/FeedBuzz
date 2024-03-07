@@ -130,7 +130,7 @@ import {
             </FlexBetween>
             <EditOutlined sx={{ color: main }} />
           </FlexBetween>
-  
+          
           <FlexBetween gap="1rem">
             <FlexBetween gap="1rem">
               <img src="http://localhost:3001/assets/linkedin.png" alt="linkedin" />

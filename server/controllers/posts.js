@@ -1,10 +1,24 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import path from "path";
 
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
     const { userId, description, picturePath } = req.body;
+    let result = undefined ;
+    //console.log(req.file.path);
+    if (req.file && req.file.path) {
+      result = await cloudinary.uploader.upload(req.file.path).catch(err => {
+        console.error('Error uploading file to Cloudinary:', err);
+        res.status(500).json({ message: 'Error uploading file to Cloudinary' });
+        return;
+      });
+    }
+    //console.log(result.secure_url);
+
     const user = await User.findById(userId);
     const newPost = new Post({
       userId,
@@ -13,15 +27,24 @@ export const createPost = async (req, res) => {
       location: user.location,
       description,
       userPicturePath: user.picturePath,
-      picturePath,
+      picturePath: result ? result.secure_url : picturePath,
       likes: {},
       comments: [],
     });
     await newPost.save();
 
     const post = await Post.find();
+    if (req.file && req.file.path) {
+      fs.unlink(req.file.path, (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      });
+    }
     res.status(201).json(post);
   } catch (err) {
+    console.log("Error end of block : "+ err.message);
     res.status(409).json({ message: err.message });
   }
 };
@@ -29,10 +52,10 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const post = await Post.find();
-    res.status(200).json(post);
+    const posts = await Post.find();
+    res.status(200).json(posts);
   } catch (err) {
-    res.status(404).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
