@@ -14,7 +14,7 @@ import userRouter from "./routes/user.js";
 import { createPost } from "./controllers/posts.js";
 import { verify } from "./midlleware/auth.js";
 import postRoutes from "./routes/posts.js";
-
+import {v2 as cloudinary} from "cloudinary";
 
 // middlewar
 // use to get the file url
@@ -43,14 +43,14 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 let paths = path.join(__dirname, 'public/assets');
 app.use("/assets", express.static(path.join(__dirname, 'public/assets')));
-console.log(paths)
+//console.log(paths)
 
 
 // file storage 
 
 const storage = multer.diskStorage({
     destination: function(req,file,cb){
-        cb(null,"public/assets");
+        cb(null,paths);
     },
     filename:function(req,file,cb){
         cb(null,file.originalname);
@@ -59,9 +59,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECERT,
+});
+
+//const result = await cloudinary.uploader.upload("public/assets/photo.png");
+
+app.get("/", (req, res) => {
+  res.send(`Server is running`);
+});
 // routes with files
 app.post("/auth/register",upload.single("picture"),register);
-app.post("/posts", verify, upload.single("picture"), createPost);
+app.post("/posts", upload.single("picture"), createPost);
 
 
 // baki sab bina file ke routes wale folder m 
