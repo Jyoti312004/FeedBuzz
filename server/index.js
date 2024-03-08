@@ -72,6 +72,8 @@ app.get("/", (req, res) => {
 });
 // routes with files
 app.post("/auth/register",upload.single("picture"),register);
+
+
 app.post("/posts", upload.single("picture"), createPost);
 
 
