@@ -123,3 +123,29 @@ export const addComment = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+/* DELETE */
+export const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params; // Assuming id is the post ID
+
+    // Find the post by ID
+    const post = await Post.findById(id);
+
+    // Check if the logged-in user is the owner of the post
+    if (post.userId !== req.user.userId) {
+      return res.status(403).json({ message: "You are not authorized to delete this post" });
+    }
+
+    // Delete the post
+    await Post.findByIdAndDelete(id);
+
+    // Fetch the updated list of posts
+    const updatedPosts = await Post.find();
+
+    res.status(200).json(updatedPosts);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+

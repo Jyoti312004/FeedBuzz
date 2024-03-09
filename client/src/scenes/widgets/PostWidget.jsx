@@ -2,7 +2,7 @@ import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
   FavoriteOutlined,
-  ShareOutlined,
+  DeleteOutline,
 } from "@mui/icons-material";
 import { Box, Divider, IconButton, Input, Typography, useTheme } from "@mui/material";
 import FlexBetween from "../../components/FlexBetween";
@@ -62,6 +62,24 @@ const PostWidget = ({
     dispatch(setPost({ post: updatedPost }));
     setCommentText(""); // Clear comment text after submitting
   };
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`https://feedbuzz.onrender.com/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        const updatedPost = await response.json();
+        dispatch(setPost({ post: updatedPost }));
+      } else {
+        console.error('Failed to delete post');
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
 
   return (
     <WidgetWrapper m="2rem 0">
@@ -104,9 +122,10 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
-        <IconButton>
-          <ShareOutlined />
-        </IconButton>
+      <IconButton onClick={handleDelete}>
+            <DeleteOutline />
+      </IconButton>
+
       </FlexBetween>
 
       {/* Input field for adding comments */}
