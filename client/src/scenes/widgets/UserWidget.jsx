@@ -11,26 +11,26 @@ import {
   import { useSelector } from "react-redux";
   import { useEffect, useState } from "react";
   import { useNavigate } from "react-router-dom";
-  const [editLink, setEditLink] = useState(false); // State to manage input box visibility
-  const [editedLink, setEditedLink] = useState(''); // State to manage edited link value
-  const handleInputChange = (event) => {
-    setEditedLink(event.target.value);
-  };
+  // const [editLink, setEditLink] = useState(false); // State to manage input box visibility
+  // const [editedLink, setEditedLink] = useState(''); // State to manage edited link value
+  // const handleInputChange = (event) => {
+  //   setEditedLink(event.target.value);
+  // };
 
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Here you can send the updated link to the server or update state accordingly
-    console.log('Updated link:', editedLink);
-    setEditLink(false); // Hide the input box after submission
-  };
+  // // Function to handle form submission
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Here you can send the updated link to the server or update state accordingly
+  //   console.log('Updated link:', editedLink);
+  //   setEditLink(false); // Hide the input box after submission
+  // };
 
-  // Function to toggle edit link input box
-  const toggleEditLink = () => {
-    setEditLink(!editLink);
-    // Reset edited link value when toggling
-    setEditedLink('');
-  };
+  // // Function to toggle edit link input box
+  // const toggleEditLink = () => {
+  //   setEditLink(!editLink);
+  //   // Reset edited link value when toggling
+  //   setEditedLink('');
+  // };
   
   const UserWidget = ({ userId, picturePath }) => {
     const [user, setUser] = useState(null);
@@ -161,20 +161,13 @@ import {
                 </Typography>
                 <Typography color={medium}>Network Platform</Typography>
               </Box>
-              </FlexBetween>
-          {/* Edit Button */}
-          <EditOutlined sx={{ color: main }} onClick={toggleEditLink} />
-        </FlexBetween>
-
-        {/* Input Box for Editing LinkedIn Link */}
-        {editLink && (
-          <form onSubmit={handleSubmit}>
-            <input type="text" value={editedLink} onChange={handleInputChange} />
-            <button type="submit">Save</button>
-          </form>
-        )}
+            </FlexBetween>
+            <EditOutlined sx={{ color: main }} />
+          </FlexBetween>
         </Box>
       </WidgetWrapper>
+
+
     );
   };
   
