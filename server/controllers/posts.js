@@ -152,3 +152,45 @@ export const deletePost = async (req, res) => {
   }
 };
 
+
+// Update social profiles
+export const updateSocialProfiles = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    // Find the user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Destructure twitter and linkedin directly from req.body.socialProfiles
+    const { twitter, linkedin } = req.body.socialProfiles;
+
+    // Check if both Twitter and LinkedIn profiles are empty
+    if (!twitter && !linkedin) {
+      // No updates provided, respond with the current user object
+      return res.status(200).json(user);
+    }
+
+    // Update the Twitter and LinkedIn profiles if provided
+    if (twitter !== undefined) {
+      user.socialProfiles.twitter = twitter;
+    }
+    if (linkedin !== undefined) {
+      user.socialProfiles.linkedin = linkedin;
+    }
+    
+    // Save the updated user
+    await user.save();
+
+    // Respond with the updated user object
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error updating social profiles:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+
