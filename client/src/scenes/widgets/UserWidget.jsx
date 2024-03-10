@@ -564,7 +564,7 @@ const UserWidget = ({ userId, picturePath }) => {
           )}
           {!editingLinkedin && linkedinProfile && ( // Render saved link if available
             <Typography color={medium} variant="subtitle2" style={{ marginTop: '8px' }}>
-              <a href={linkedinProfile} target="_blank" rel="noopener noreferrer">Click here to visit</a>
+              {/* <a href={linkedinProfile} target="_blank" rel="noopener noreferrer">{linkedinProfile}</a> */}
             </Typography>
           )}
           <EditOutlined sx={{ color: main }} onClick={handleLinkedinEdit} />
