@@ -533,7 +533,7 @@ const UserWidget = ({ userId, picturePath }) => {
           )}
           {!editingTwitter && twitterHandle && ( // Render saved link if available
             <Typography color={medium} variant="subtitle2" style={{ marginTop: '8px' }}>
-              <a href={`https://twitter.com/${twitterHandle}`} target="_blank" rel="noopener noreferrer">{`https://twitter.com/${twitterHandle}`}</a>
+              <a href={`${twitterHandle}`} target="_blank" rel="noopener noreferrer">Click here to visit</a>
             </Typography>
           )}
           <EditOutlined sx={{ color: main }} onClick={handleTwitterEdit} />
@@ -564,7 +564,7 @@ const UserWidget = ({ userId, picturePath }) => {
           )}
           {!editingLinkedin && linkedinProfile && ( // Render saved link if available
             <Typography color={medium} variant="subtitle2" style={{ marginTop: '8px' }}>
-              <a href={linkedinProfile} target="_blank" rel="noopener noreferrer">{linkedinProfile}</a>
+              <a href={linkedinProfile} target="_blank" rel="noopener noreferrer">Click here to visit</a>
             </Typography>
           )}
           <EditOutlined sx={{ color: main }} onClick={handleLinkedinEdit} />
