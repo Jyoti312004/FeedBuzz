@@ -10,7 +10,7 @@ import Friend from "../../components/Friend";
 import WidgetWrapper from "../../components/WidgetWrapper";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "../../state";
+import { setPost , setPosts } from "../../state";
 
 const PostWidget = ({
   postId,
@@ -70,9 +70,9 @@ const PostWidget = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      if (response.ok) {
+      if (response.status === 200) {
         const updatedPost = await response.json();
-        dispatch(setPost({ post: updatedPost }));
+        dispatch(setPosts({ posts: updatedPost }));
       } else {
         console.error('Failed to delete post');
       }
@@ -122,10 +122,11 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
+    {(loggedInUserId === postUserId) && 
       <IconButton onClick={handleDelete}>
             <DeleteOutline />
       </IconButton>
-
+}
       </FlexBetween>
 
       {/* Input field for adding comments */}
