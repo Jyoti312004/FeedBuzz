@@ -4,10 +4,9 @@ FeedBuzz is a social media platform designed for content sharing and engagement.
 
 ## Key Features:
 - **User Registration and Authentication:** Register and authenticate securely.
-- **Content Creation and Sharing:** Share various content types with customizable privacy settings.
+- **Content Creation and Sharing:** Share various content types with creative ideas.
 - **Content Discovery and Interaction:** Personalized feed, like, comment, share posts, and follow/unfollow users.
-- **User Connections and Messaging:** Send connection requests and direct messages.
-- **Real-Time Chat:** Engage in real-time conversations with connections.
+- **User Connections:** Send connection requests
 
 ## Architecture:
 - **Frontend:** React.js for interactive UI.
