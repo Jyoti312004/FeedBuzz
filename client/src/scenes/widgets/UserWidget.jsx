@@ -579,11 +579,14 @@ import { Box, Typography, Divider, useTheme, TextField, Button } from "@mui/mate
 import UserImage from "../../components/UserImage";
 import FlexBetween from "../../components/FlexBetween";
 import WidgetWrapper from "../../components/WidgetWrapper";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "../../state";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserWidget = ({ userId, picturePath }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   const [editingTwitter, setEditingTwitter] = useState(false);
   const [editingLinkedin, setEditingLinkedin] = useState(false);
@@ -627,10 +630,24 @@ const UserWidget = ({ userId, picturePath }) => {
     setEditingLinkedin(true);
   };
 
-  const handleTwitterSave = () => {
+  const handleTwitterSave = async () => {
     setEditingTwitter(false);
     setUser(prevUser => ({ ...prevUser, socialProfiles: { ...prevUser.socialProfiles, twitter: twitterHandle } }));
     // Make API call to save changes
+    ///posts/:userId/social-profiles
+
+      const response = await fetch(
+        `https://localhost:3001/posts/${userId}/social-profiles`,
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await response.json();
+      dispatch(setPosts({ posts: data }));
+
+      
+
   };
 
   const handleLinkedinSave = () => {
