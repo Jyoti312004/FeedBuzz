@@ -1,6 +1,6 @@
 # FeedBuzz - Social Media Platform
 
-FeedBuzz is a social media platform designed for content sharing and engagement. Users can register, create profiles, share content, interact with posts, follow other users, and engage in real-time chat. Built with the MERN stack, it ensures performance, security, usability, and compatibility.
+FeedBuzz is a social media platform designed for content sharing and engagement. Users can register, create profiles, share content, interact with posts, follow other user. Built with the MERN stack, it ensures performance, security, usability, and compatibility.
 
 ## Key Features:
 - **User Registration and Authentication:** Register and authenticate securely.
@@ -14,8 +14,8 @@ FeedBuzz is a social media platform designed for content sharing and engagement.
 - **Database:** MongoDB for data storage.
 
 ## Deployment:
-- Host frontend on AWS S3 or Netlify.
-- Deploy backend on AWS Elastic Beanstalk or Heroku.
+- Host frontend on vercel.
+- Deploy backend on render.
 - Database hosting with MongoDB Atlas.
 
 ## Security:
@@ -24,4 +24,4 @@ FeedBuzz is a social media platform designed for content sharing and engagement.
 - Content moderation to prevent abuse.
 
 ## Conclusion:
-FeedBuzz provides a user-friendly platform for users to connect, share, and engage in real-time. It ensures performance, security, and scalability for a seamless user experience.
+FeedBuzz provides a user-friendly platform for users to connect and share. It ensures performance, security, and scalability for a seamless user experience.
