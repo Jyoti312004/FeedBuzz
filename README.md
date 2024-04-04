@@ -1,12 +1,12 @@
 # FeedBuzz - Social Media Platform
 
-FeedBuzz is a social media platform designed for content sharing and engagement. Users can register, create profiles, share content, interact with posts, follow other user. Built with the MERN stack, it ensures performance, security, usability, and compatibility.
+FeedBuzz is a social media platform designed for content sharing and engagement. Users can register, create profiles, share content, interact with posts and follow other user. Built with the MERN stack, it ensures performance, security, usability and compatibility.
 
 ## Key Features:
 - **User Registration and Authentication:** Register and authenticate securely.
 - **Content Creation and Sharing:** Share various content types with creative ideas.
 - **Content Discovery and Interaction:** Personalized feed, like, comment, share posts, and follow/unfollow users.
-- **User Connections:** Send connection requests
+- **User Connections:** connect with your friends 
 
 ## Architecture:
 - **Frontend:** React.js for interactive UI.
